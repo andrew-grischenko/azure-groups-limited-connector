@@ -1,0 +1,216 @@
+{
+  "properties": {
+    "connectionParameters": {
+      "token": {
+        "type": "oauthSetting",
+        "oAuthSettings": {
+          "identityProvider": "aad",
+          "clientId": "",
+          "scopes": [
+            "Group.ReadWrite.All",
+            "GroupMember.ReadWrite.All",
+            "offline_access"
+          ],
+          "redirectMode": "GlobalPerConnector",
+          "redirectUrl": "https://global.consent.azure-apim.net/redirect",
+          "properties": {
+            "IsFirstParty": "False",
+            "AzureActiveDirectoryResourceId": "https://graph.microsoft.com",
+            "IsOnbehalfofLoginSupported": true
+          },
+          "customParameters": {
+            "loginUri": {
+              "value": "https://login.microsoftonline.com"
+            },
+            "tenantId": {
+              "value": ""
+            },
+            "resourceUri": {
+              "value": "https://graph.microsoft.com"
+            },
+            "enableOnbehalfOfLogin": {
+              "value": "false"
+            }
+          }
+        }
+      },
+      "token:TenantId": {
+        "type": "string",
+        "metadata": {
+          "sourceType": "AzureActiveDirectoryTenant"
+        },
+        "uiDefinition": {
+          "constraints": {
+            "required": "false",
+            "hidden": "true"
+          }
+        }
+      }
+    },
+    "connectionParameterSets": {
+      "uiDefinition": {
+        "displayName": "Authentication Type",
+        "description": "Type of authentication to be used."
+      },
+      "values": [
+        {
+          "name": "oauth2-auth",
+          "uiDefinition": {
+            "displayName": "OAuth Connection",
+            "description": "OAuth Connection"
+          },
+          "parameters": {
+            "token": {
+              "type": "oauthSetting",
+              "oAuthSettings": {
+                "identityProvider": "aad",
+                "clientId": "",
+                "scopes": [
+                  "Group.ReadWrite.All",
+                  "GroupMember.ReadWrite.All",
+                  "offline_access"
+                ],
+                "redirectMode": "GlobalPerConnector",
+                "redirectUrl": "https://global.consent.azure-apim.net/redirect",
+                "properties": {
+                  "IsFirstParty": "False",
+                  "AzureActiveDirectoryResourceId": "https://graph.microsoft.com",
+                  "IsOnbehalfofLoginSupported": true
+                },
+                "customParameters": {
+                  "grantType": {
+                    "value": "code"
+                  },
+                  "loginUri": {
+                    "value": "https://login.microsoftonline.com"
+                  },
+                  "tenantId": {
+                    "value": ""
+                  },
+                  "resourceUri": {
+                    "value": "https://graph.microsoft.com"
+                  },
+                  "enableOnbehalfOfLogin": {
+                    "value": "false"
+                  }
+                }
+              },
+              "uiDefinition": {
+                "displayName": "OAuth Connection",
+                "description": "OAuth Connection",
+                "constraints": {
+                  "required": "true",
+                  "hidden": "false"
+                }
+              }
+            }
+          },
+          "metadata": {
+            "allowSharing": false
+          }
+        },
+        {
+          "name": "oAuthClientCredentials",
+          "uiDefinition": {
+            "displayName": "Service Principal Connection",
+            "description": "Service Principal Connection"
+          },
+          "parameters": {
+            "token": {
+              "type": "oauthSetting",
+              "oAuthSettings": {
+                "identityProvider": "aad",
+                "clientId": "",
+                "scopes": [
+                  "Group.ReadWrite.All",
+                  "GroupMember.ReadWrite.All",
+                  "offline_access"
+                ],
+                "redirectMode": "GlobalPerConnector",
+                "redirectUrl": "https://global.consent.azure-apim.net/redirect",
+                "properties": {
+                  "IsFirstParty": "False",
+                  "AzureActiveDirectoryResourceId": "https://graph.microsoft.com",
+                  "IsOnbehalfofLoginSupported": true
+                },
+                "customParameters": {
+                  "grantType": {
+                    "value": "client_credentials"
+                  },
+                  "loginUri": {
+                    "value": "https://login.microsoftonline.com"
+                  },
+                  "tenantId": {
+                    "value": ""
+                  },
+                  "resourceUri": {
+                    "value": "https://graph.microsoft.com"
+                  },
+                  "enableOnbehalfOfLogin": {
+                    "value": "false"
+                  }
+                }
+              },
+              "uiDefinition": {
+                "displayName": "Service Principal Connection",
+                "description": "Service Principal Connection",
+                "constraints": {
+                  "required": "false",
+                  "hidden": "true"
+                }
+              }
+            },
+            "token:clientId": {
+              "type": "string",
+              "uiDefinition": {
+                "displayName": "Client ID",
+                "schema": {
+                  "type": "string",
+                  "description": "Client (or Application) ID of your application"
+                },
+                "constraints": {
+                  "required": "true",
+                  "hidden": "false"
+                }
+              }
+            },
+            "token:clientSecret": {
+              "type": "securestring",
+              "uiDefinition": {
+                "displayName": "Client Secret",
+                "schema": {
+                  "type": "securestring",
+                  "description": "Client secret of your application"
+                },
+                "constraints": {
+                  "required": "true",
+                  "hidden": "false"
+                }
+              }
+            },
+            "token:TenantId": {
+              "type": "string",
+              "uiDefinition": {
+                "displayName": "Tenant",
+                "schema": {
+                  "type": "string",
+                  "description": "The tenant ID of your application"
+                },
+                "constraints": {
+                  "required": "true",
+                  "hidden": "false"
+                }
+              }
+            }
+          },
+          "metadata": {
+            "allowSharing": true
+          }
+        }
+      ]
+    },
+    "iconBrandColor": "#ffffff",
+    "capabilities": [],
+    "publisher": "Technomancy"
+  }
+}

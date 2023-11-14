@@ -1,0 +1,577 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.1",
+    "title": "AzureGroupsLimited",
+    "description": "Azure Active Directory Groups limited scopes and operations.",
+    "x-ms-deployment-version": "1.0.1",
+    "x-ms-api-annotation": {
+      "status": "Production"
+    },
+    "contact": {
+      "name": "Microsoft",
+      "url": "https://support.microsoft.com"
+    }
+  },
+  "host": "graph.microsoft.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1.0/groups/{id}": {
+      "get": {
+        "summary": "Get group",
+        "description": "Get details for a group.",
+        "operationId": "GetGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id__in_path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "schema": {
+              "$ref": "#/definitions/GetGroup_Response"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1.0/groups/{id}/members": {
+      "get": {
+        "summary": "Get group members",
+        "description": "Get the users who are members of a group.",
+        "operationId": "GetGroupMembers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id__in_path"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Limit on the number of results to return (default = all).",
+            "required": false,
+            "x-ms-summary": "Top",
+            "x-ms-visibility": "advanced",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "schema": {
+              "$ref": "#/definitions/GetGroupMembers_Response"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
+        "deprecated": false
+      }
+    },
+    "/v1.0/groups/{groupId}/members/{memberId}/$ref": {
+      "delete": {
+        "summary": "Remove Member From Group",
+        "description": "Remove Member From Group",
+        "operationId": "RemoveMemberFromGroup",
+        "x-ms-no-generic-test": true,
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "description": "The Id of the group.",
+            "x-ms-summary": "Group Id",
+            "type": "string"
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "description": "The Id of the member.",
+            "x-ms-summary": "Member Id",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1.0/groups/{id}/members/$ref": {
+      "post": {
+        "summary": "Add user to group",
+        "description": "Add a user to a group in this AAD tenant.",
+        "operationId": "AddUserToGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id__in_path"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetGroup_Request"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "deprecated": false,
+        "x-ms-no-generic-test": true,
+        "x-ms-visibility": "important"
+      }
+    },
+    "/v1.0/groups": {
+      "post": {
+        "summary": "Create security group",
+        "description": "Create a security group in your AAD tenant.",
+        "operationId": "CreateSecurityGroup",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "displayName": {
+                  "type": "string",
+                  "title": "Display name",
+                  "description": "Display name",
+                  "x-ms-visibility": "important"
+                },
+                "description": {
+                  "type": "string",
+                  "title": "Description",
+                  "description": "Description",
+                  "x-ms-visibility": "important"
+                },
+                "mailEnabled": {
+                  "type": "boolean",
+                  "title": "Mail enabled",
+                  "description": "Mail enabled",
+                  "enum": [
+                    true,
+                    false
+                  ],
+                  "default": false,
+                  "x-ms-visibility": "internal"
+                },
+                "mailNickname": {
+                  "type": "string",
+                  "title": "Mail nickname",
+                  "description": "Mail nickname",
+                  "x-ms-visibility": "internal",
+                  "default": "none"
+                },
+                "securityEnabled": {
+                  "type": "boolean",
+                  "title": "Security enabled",
+                  "description": "Security enabled",
+                  "enum": [
+                    true,
+                    false
+                  ],
+                  "default": true,
+                  "x-ms-visibility": "internal"
+                },
+                "owners@odata.bind": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "title": "Group owners",
+                    "description": "Group owners",
+                    "x-ms-visibility": "important"
+                  },
+                  "description": "Group owners"
+                },
+                "members@odata.bind": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "description": "Group members",
+                    "title": "Group members",
+                    "x-ms-visibility": "important"
+                  },
+                  "description": "Group members"
+                }
+              },
+              "required": [
+                "owners@odata.bind",
+                "description",
+                "securityEnabled",
+                "mailEnabled",
+                "displayName",
+                "mailNickname"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "201",
+            "schema": {
+              "$ref": "#/definitions/CreateGroup_Response"
+            }
+          }
+        },
+        "x-ms-no-generic-test": true,
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "GetGroup_Request": {
+      "required": [
+        "@odata.id"
+      ],
+      "type": "object",
+      "properties": {
+        "@odata.id": {
+          "description": "Unique identifer of a user (Ex.'5e6cf5c7-b511-4842-6aae-3f6b8ae5e95b').",
+          "type": "string",
+          "x-ms-summary": "User Id",
+          "x-ms-visibility": "important"
+        }
+      }
+    },
+    "CreateGroup_Response": {
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "description": "@odata.context",
+          "type": "string",
+          "x-ms-summary": "@odata.context"
+        },
+        "id": {
+          "description": "id",
+          "type": "string",
+          "x-ms-summary": "id"
+        },
+        "deletedDateTime": {
+          "description": "deletedDateTime",
+          "type": "string",
+          "x-ms-summary": "deletedDateTime"
+        },
+        "classification": {
+          "description": "classification",
+          "type": "string",
+          "x-ms-summary": "classification"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "createdDateTime",
+          "type": "string",
+          "x-ms-summary": "createdDateTime"
+        },
+        "description": {
+          "description": "description",
+          "type": "string",
+          "x-ms-summary": "description"
+        },
+        "displayName": {
+          "format": "date-time",
+          "description": "displayName",
+          "type": "string",
+          "x-ms-summary": "displayName"
+        },
+        "groupTypes": {
+          "description": "groupTypes",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-summary": "groupTypes"
+        },
+        "mail": {
+          "description": "mail",
+          "type": "string",
+          "x-ms-summary": "mail"
+        },
+        "mailEnabled": {
+          "description": "mailEnabled",
+          "type": "boolean",
+          "x-ms-summary": "mailEnabled"
+        },
+        "mailNickname": {
+          "format": "date-time",
+          "description": "mailNickname",
+          "type": "string",
+          "x-ms-summary": "mailNickname"
+        },
+        "onPremisesLastSyncDateTime": {
+          "description": "onPremisesLastSyncDateTime",
+          "type": "string",
+          "x-ms-summary": "onPremisesLastSyncDateTime"
+        },
+        "onPremisesSecurityIdentifier": {
+          "description": "onPremisesSecurityIdentifier",
+          "type": "string",
+          "x-ms-summary": "onPremisesSecurityIdentifier"
+        },
+        "onPremisesSyncEnabled": {
+          "description": "onPremisesSyncEnabled",
+          "type": "boolean",
+          "x-ms-summary": "onPremisesSyncEnabled"
+        },
+        "proxyAddresses": {
+          "description": "proxyAddresses",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-summary": "proxyAddresses"
+        },
+        "renewedDateTime": {
+          "format": "date-time",
+          "description": "renewedDateTime",
+          "type": "string",
+          "x-ms-summary": "renewedDateTime"
+        },
+        "securityEnabled": {
+          "description": "securityEnabled",
+          "type": "boolean",
+          "x-ms-summary": "securityEnabled"
+        },
+        "visibility": {
+          "description": "visibility",
+          "type": "string",
+          "x-ms-summary": "visibility"
+        }
+      }
+    },
+    "GetGroup_Response": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique identifier for the group.",
+          "type": "string",
+          "x-ms-summary": "Id"
+        },
+        "deletedDateTime": {
+          "format": "date-time",
+          "description": "Date-time the group was deleted.",
+          "type": "string",
+          "x-ms-summary": "Deleted Date Time"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time the group was created.",
+          "type": "string",
+          "x-ms-summary": "Created Date Time"
+        },
+        "description": {
+          "description": "An optional description for the group.",
+          "type": "string",
+          "x-ms-summary": "Description"
+        },
+        "displayName": {
+          "description": "The display name for the group.",
+          "type": "string",
+          "x-ms-summary": "Display Name"
+        },
+        "mail": {
+          "description": "The SMTP address for the group.",
+          "type": "string",
+          "x-ms-summary": "Mail"
+        },
+        "mailEnabled": {
+          "description": "True if the group is mail-enabled.",
+          "type": "boolean",
+          "x-ms-summary": "Mail Enabled"
+        },
+        "onPremisesLastSyncDateTime": {
+          "format": "date-time",
+          "description": "A date-time indicating the last time at which the group was synced with the on-premises directory.",
+          "type": "string",
+          "x-ms-summary": "On Premises Last Sync Date Time"
+        },
+        "onPremisesSyncEnabled": {
+          "description": "True if this group is synced from an on-premises directory.",
+          "type": "boolean",
+          "x-ms-summary": "On Premises Sync Enabled"
+        },
+        "securityEnabled": {
+          "description": "True if the group is a security group.",
+          "type": "boolean",
+          "x-ms-summary": "Security Enabled"
+        },
+        "visibility": {
+          "description": "Visibility of the group (public or private).",
+          "type": "string",
+          "x-ms-summary": "Visibility"
+        }
+      }
+    },
+    "GetGroupMembers_Response": {
+      "type": "object",
+      "properties": {
+        "@odata.nextLink": {
+          "description": "Link to get next page of results",
+          "type": "string",
+          "x-ms-summary": "Next link",
+          "x-ms-visibility": "internal"
+        },
+        "value": {
+          "description": "Array of users that are members of the group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GetUser_Response"
+          },
+          "x-ms-summary": "Group Members"
+        }
+      }
+    },
+    "GetUser_Response": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "A unique identifer for the user.",
+          "type": "string",
+          "x-ms-summary": "Id"
+        },
+        "businessPhones": {
+          "type": "array",
+          "items": {
+            "description": "Business phone number for the new user.",
+            "type": "string",
+            "x-ms-summary": "Business Phone"
+          },
+          "x-ms-summary": "Business Phones"
+        },
+        "displayName": {
+          "description": "The name displayed in the address book for the user.",
+          "type": "string",
+          "x-ms-summary": "Display Name"
+        },
+        "givenName": {
+          "description": "The given name (first name) of the user.",
+          "type": "string",
+          "x-ms-summary": "Given Name"
+        },
+        "jobTitle": {
+          "description": "The user's job title.",
+          "type": "string",
+          "x-ms-summary": "Job Title"
+        },
+        "mail": {
+          "description": "The SMTP address for the user.",
+          "type": "string",
+          "x-ms-summary": "Mail"
+        },
+        "mobilePhone": {
+          "description": "The primary cellular telephone number for the user.",
+          "type": "string",
+          "x-ms-summary": "Mobile Phone"
+        },
+        "officeLocation": {
+          "description": "The office location in the user's place of business.",
+          "type": "string",
+          "x-ms-summary": "Office Location"
+        },
+        "preferredLanguage": {
+          "description": "The preferred language for the user. Should follow ISO 639-1 Code; for example 'en-US'.",
+          "type": "string",
+          "x-ms-summary": "Preferred Language"
+        },
+        "surname": {
+          "description": "The user's surname (family name or last name).",
+          "type": "string",
+          "x-ms-summary": "Surname"
+        },
+        "userPrincipalName": {
+          "description": "The user principal name (UPN) of the user.",
+          "type": "string",
+          "x-ms-summary": "User Principal Name"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "id__in_path": {
+      "name": "id",
+      "in": "path",
+      "description": "Unique identifer of a group (Ex. '40639f36-46a6-73a6-91e2-9584b7913429').",
+      "required": true,
+      "x-ms-summary": "Group Id",
+      "type": "string"
+    },
+    "id__in_path_2": {
+      "name": "id",
+      "in": "path",
+      "description": "Unique identifier of a user (Ex. 'user@tennant.onmicrosoft.com' or '5f6ce5c7-b521-4842-9bbe-3f6d5aa5e35b').",
+      "required": true,
+      "x-ms-summary": "User Id or Principal Name",
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "oauth2-auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "tokenUrl": "https://login.windows.net/common/oauth2/authorize",
+      "scopes": {
+        "Group.ReadWrite.All": "Group.ReadWrite.All",
+        "GroupMember.ReadWrite.All": "GroupMember.ReadWrite.All",
+        "offline_access": "offline_access"
+      },
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize"
+    },
+    "oAuthClientCredentials": {
+      "type": "oauth2",
+      "flow": "application",
+      "tokenUrl": "https://login.windows.net/common/oauth2/authorize",
+      "scopes": {
+        "Group.ReadWrite.All": "Group.ReadWrite.All",
+        "GroupMember.ReadWrite.All": "GroupMember.ReadWrite.All",
+        "offline_access": "offline_access"
+      }
+    }
+  },
+  "x-ms-connector-metadata": [
+    {
+      "propertyName": "Privacy policy",
+      "propertyValue": "https://privacy.microsoft.com/en-us/privacystatement"
+    },
+    {
+      "propertyName": "Website",
+      "propertyValue": "https://azure.microsoft.com/en-us/services/active-directory"
+    },
+    {
+      "propertyName": "Categories",
+      "propertyValue": "IT Operations;Security"
+    }
+  ],
+  "basePath": "/",
+  "security": [
+    {
+      "oauth2-auth": [
+        "Group.ReadWrite.All",
+        "GroupMember.ReadWrite.All",
+        "offline_access"
+      ]
+    },
+    {
+      "oAuthClientCredentials": [
+        "Group.ReadWrite.All",
+        "GroupMember.ReadWrite.All",
+        "offline_access"
+      ]
+    }
+  ]
+}
