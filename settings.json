@@ -3,7 +3,7 @@
   "environment": "0b9cbc21-b458-e8bd-9bf8-064cd01b9fc7",
   "apiProperties": "apiProperties.json",
   "apiDefinition": "apiDefinition.swagger.json",
-  "icon": null,
+  "icon": "icon.png",
   "powerAppsUrl": "https://api.powerapps.com",
   "powerAppsApiVersion": "2016-11-01"
 }
