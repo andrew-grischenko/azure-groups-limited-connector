@@ -1,6 +1,5 @@
 {
   "connectorId": "shared_azuregroupslimited-5f5f1f417b32ee23c8-5f1c485841ab2844ba",
-  "environment": "0b9cbc21-b458-e8bd-9bf8-064cd01b9fc7",
   "apiProperties": "apiProperties.json",
   "apiDefinition": "apiDefinition.swagger.json",
   "icon": "icon.png",
