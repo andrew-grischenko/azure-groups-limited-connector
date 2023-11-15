@@ -12,7 +12,7 @@
             "offline_access"
           ],
           "redirectMode": "GlobalPerConnector",
-          "redirectUrl": "https://global.consent.azure-apim.net/redirect",
+          "redirectUrl": "https://global.consent.azure-apim.net/redirect/azuregroupslimited-5f5f1f417b32ee23c8-5f1c485841ab2844ba",
           "properties": {
             "IsFirstParty": "False",
             "AzureActiveDirectoryResourceId": "https://graph.microsoft.com",
@@ -209,7 +209,7 @@
         }
       ]
     },
-    "iconBrandColor": "#ffffff",
+    "iconBrandColor": "#000033",
     "capabilities": [],
     "publisher": "Technomancy"
   }

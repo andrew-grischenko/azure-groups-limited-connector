@@ -1,9 +1,9 @@
 {
-  "connectorId": "shared_azuregroupslimited-5faaf4a04946bab1f5-5f1c485841ab2844ba",
-  "environment": "6518dc11-1ad2-eb61-99f7-4d8ee00c5ec8",
-  "apiProperties": "./apiProperties.json",
-  "apiDefinition": "./apiDefinition.swagger.json",
-  "icon": "./icon.png",
+  "connectorId": "shared_azuregroupslimited-5f5f1f417b32ee23c8-5f1c485841ab2844ba",
+  "environment": "0b9cbc21-b458-e8bd-9bf8-064cd01b9fc7",
+  "apiProperties": "apiProperties.json",
+  "apiDefinition": "apiDefinition.swagger.json",
+  "icon": null,
   "powerAppsUrl": "https://api.powerapps.com",
   "powerAppsApiVersion": "2016-11-01"
 }

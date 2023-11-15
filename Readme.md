@@ -10,7 +10,6 @@ This connector exposes operations to be used in Microsoft Flow and PowerApps.
 ## Supported Operations
 The connector supports the following operations:
 * `Create Security group`: Create a security group in your AAD tenant
-* `Find group`: Find and get group details by name 
 * `Get group`: Get details for a group by id
 * `Get group members`: Get the users who are members of a group
 * `Remove Member From Group`: Remove Member From Group

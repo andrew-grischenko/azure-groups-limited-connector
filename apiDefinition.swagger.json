@@ -137,6 +137,38 @@
       }
     },
     "/v1.0/groups": {
+      "get": {
+        "summary": "Find group",
+        "description": "Find group by attributes",
+        "operationId": "FindGroup",
+        "parameters": [
+          {
+            "name": "$search",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ConsistencyLevel",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "eventual",
+            "description": "Consistency level",
+            "x-ms-visibility": "advanced"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "schema": {
+              "$ref": "#/definitions/GetGroup_Response"
+            }
+          }
+        },
+        "deprecated": false
+      },
       "post": {
         "summary": "Create security group",
         "description": "Create a security group in your AAD tenant.",
@@ -561,13 +593,6 @@
   "security": [
     {
       "oauth2-auth": [
-        "Group.ReadWrite.All",
-        "GroupMember.ReadWrite.All",
-        "offline_access"
-      ]
-    },
-    {
-      "oAuthClientCredentials": [
         "Group.ReadWrite.All",
         "GroupMember.ReadWrite.All",
         "offline_access"
