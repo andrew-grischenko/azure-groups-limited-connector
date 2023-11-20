@@ -143,20 +143,11 @@
         "operationId": "FindGroup",
         "parameters": [
           {
-            "name": "$search",
+            "name": "$filter",
             "in": "query",
             "required": true,
             "type": "string",
             "x-ms-visibility": "important"
-          },
-          {
-            "name": "ConsistencyLevel",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "default": "eventual",
-            "description": "Consistency level",
-            "x-ms-visibility": "advanced"
           }
         ],
         "responses": {

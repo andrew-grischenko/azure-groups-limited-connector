@@ -8,9 +8,10 @@ This connector is built on top of [Microsoft Azure Active Directory Connector](h
 This connector exposes operations to be used in Microsoft Flow and PowerApps.
 
 ## Supported Operations
-The connector supports the following operations:
+The connector supports the following actions:
 * `Create Security group`: Create a security group in your AAD tenant
 * `Get group`: Get details for a group by id
+* `Find group`: Find a group by a criteria
 * `Get group members`: Get the users who are members of a group
 * `Remove Member From Group`: Remove Member From Group
 * `Add user to group`: Add a user to a group in this AAD tenant
@@ -30,7 +31,7 @@ Since the connector uses OAuth as authentication type, we first need to register
 1. Create an Azure AD application
 This can be done using [Azure Portal] (https://portal.azure.com), by following the steps [here](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app).  Once created, note down the value of Application (Client) ID. You will need this later.
 
-2. Configure (Update) your Azure AD application to access the Azure Active Directory API
+2. Configure (Update) your Azure AD application to access the Microsoft Graph API
 This step will ensure that your application can successfully retrieve an access token to invoke Azure Active Directory rest APIs on behalf of your users.  To do this, follow the steps [here](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-configure-app-access-web-apis).
     - For redirect URI, use "https://global.consent.azure-apim.net/redirect"
     - For the credentials, use a client secret (and not certificates).  Remember to note the secret down, you will need this later and it is shown only once.
@@ -44,7 +45,7 @@ Run the following commands and follow the prompts:
 ```paconn
 paconn login
 
-paconn create --api-def apiDefinition.swagger.json --api-prop apiProperties.json --secret <client_secret>
+paconn create -s settings.json --secret <client_secret>
 ```
 
 ## Helpful documentation used
@@ -55,3 +56,4 @@ paconn create --api-def apiDefinition.swagger.json --api-prop apiProperties.json
 * [Streamlining Integration: Using Service Principal authentication on Custom connectors with Microsoft Graph Application Permissions](https://ashiqf.com/2023/10/28/streamlining-integration-using-service-principal-authentication-on-custom-connectors-with-microsoft-graph-application-permissions/)
 * [Microsoft Power Platform Connectors CLI](https://learn.microsoft.com/en-us/connectors/custom-connectors/paconn-cli)
 * [Microsoft Azure Active Directory Connector on GitHub](https://github.com/microsoft/PowerPlatformConnectors/tree/master/certified-connectors/AzureAD)
+* [Configure custom connectors with authenticated APIs in Microsoft Power Platform](https://learn.microsoft.com/en-us/training/modules/configure-custom-connectors-api/)
